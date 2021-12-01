@@ -5,9 +5,50 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
+// plus
+List plus(NumericVector x, NumericVector y);
+RcppExport SEXP _intarith_plus(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(plus(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// minus
+List minus(NumericVector x, NumericVector y);
+RcppExport SEXP _intarith_minus(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(minus(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mult
+List mult(NumericVector x, NumericVector y);
+RcppExport SEXP _intarith_mult(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(mult(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rcpp_hello_world
 List rcpp_hello_world();
-RcppExport SEXP _Rcpp_rcpp_hello_world() {
+RcppExport SEXP _intarith_rcpp_hello_world() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -15,13 +56,42 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rcpp_plus
+List rcpp_plus(NumericVector x, NumericVector y);
+RcppExport SEXP _intarith_rcpp_plus(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_plus(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_minus
+List rcpp_minus(NumericVector x, NumericVector y);
+RcppExport SEXP _intarith_rcpp_minus(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_minus(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_Rcpp_rcpp_hello_world", (DL_FUNC) &_Rcpp_rcpp_hello_world, 0},
+    {"_intarith_plus", (DL_FUNC) &_intarith_plus, 2},
+    {"_intarith_minus", (DL_FUNC) &_intarith_minus, 2},
+    {"_intarith_mult", (DL_FUNC) &_intarith_mult, 2},
+    {"_intarith_rcpp_hello_world", (DL_FUNC) &_intarith_rcpp_hello_world, 0},
+    {"_intarith_rcpp_plus", (DL_FUNC) &_intarith_rcpp_plus, 2},
+    {"_intarith_rcpp_minus", (DL_FUNC) &_intarith_rcpp_minus, 2},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_Rcpp(DllInfo *dll) {
+RcppExport void R_init_intarith(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
